@@ -5,17 +5,17 @@ jobs:
     name: build and publish
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
+      - uses: actions/checkout@master
       - name: npm install
-        uses: actions/npm@main
+        uses: actions/npm@master
         with:
           args: install
       - name: docker build
-        uses: actions/docker/cli@main
+        uses: actions/docker/cli@master
         with:
           args: build -t ugoslim/nodebackend ./server .
       - name: docker login
-        uses: actions/docker/login@main
+        uses: actions/docker/login@master
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
