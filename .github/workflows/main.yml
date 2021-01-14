@@ -1,32 +1,25 @@
 on: push
-name: nodeBackend CI
+name: npm build, lint, test and publish
 jobs:
-  build:
+  build-and-publish:
     name: build and publish
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x, 10.x]  
     steps:
       - uses: actions/checkout@main
-      - name: npm install ${{ matrix.node-version }}
-        uses: actions/setup-node@main
+      - name: npm install
+        uses: actions/npm@main
         with:
-          node-version: ${{ matrix.mode-version }}
-      - run: npm install
-        env:
-          CI: true
+          args: install
       - name: docker build
         uses: actions/docker/cli@main
         with:
-          args: build -t ugoslim/nodebackend .
+          args: build -t ugoslim/nodebackend ./server .
       - name: docker login
-        uses: actions/docker/login@master
+        uses: actions/docker/login@main
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          dockerfile: ./server/Dockerfile
       - name: docker push
-        uses: actions/docker/cli@main
+        uses: actions/docker/cli@master
         with:
           args: push ugoslim/nodebackend
