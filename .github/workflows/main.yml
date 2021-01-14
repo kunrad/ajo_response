@@ -8,16 +8,16 @@ jobs:
       matrix:
         node-version: [12.x, 10.x]  
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@main
       - name: npm install ${{ matrix.node-version }}
-        uses: actions/setup-node@master
+        uses: actions/setup-node@main
         with:
           node-version: ${{ matrix.mode-version }}
       - run: npm install
         env:
           CI: true
       - name: docker build
-        uses: actions/docker/cli@master
+        uses: actions/docker/cli@main
         with:
           args: build -t ugoslim/nodebackend .
       - name: docker login
@@ -27,6 +27,6 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           dockerfile: ./server/Dockerfile
       - name: docker push
-        uses: actions/docker/cli@master
+        uses: actions/docker/cli@main
         with:
           args: push ugoslim/nodebackend
