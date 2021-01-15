@@ -36,4 +36,22 @@ However, you can simply run the yaml file in the workflow to simply build the ap
 
 # Number of apps
 In each of the dep files contains the deployment manifest files, HorizontalScalling manifest files and Services manifest files all attached as one kubernetes manifest files.
-Also in our deployment file we implemented a RllingUpdate strategy which ensures the applications uses a canary approach to deployments.
+Also in our deployment file we implemented a RollingUpdate strategy which ensures the applications uses a canary approach to deployments.
+
+# View Application
+in order to view the Nodejs response 
+kubectl port-forward -n ajo deployment/nodebackend 3000:3000
+
+to view the goland response
+Because, the golang app sends its response through the teminal, the best approach is to get it through the terminal 
+
+kubectl get pods --all-namespaces | grep client 
+
+to copy any of the running pods name
+
+kubectl logs -n ajo client***
+
+# Install the apps directly using the kubectl approach
+
+Kubectl apply -f namespaces
+kubectl apply -f workloads
