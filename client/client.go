@@ -10,7 +10,7 @@ import (
 
 func main() {
 	for {
-		resp, err := http.Get("http://localhost:3000/")
+		resp, err := http.Get("http://nodebackend.ajo.svc.cluster.local:3000")
 		if err != nil {
 			fmt.Printf( "failed to reach server: %v\n", err)
 			os.Exit(1)
@@ -27,3 +27,7 @@ func main() {
 		time.Sleep(10 * time.Second)
 	}
 }
+
+
+
+

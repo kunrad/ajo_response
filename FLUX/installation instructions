@@ -1,0 +1,22 @@
+Mac OS
+
+brew install fluxcd
+
+Ubuntu 
+
+sudo snap install fluxctl
+
+# generate an identity
+run the command, the generates a key which is placed in the https://github.com/YOURUSER/REPO_NAME/settings/keys/new and enable the R/W 
+$ fluxctl identity 
+ssh-rsa xxxxxxxxxxxx
+
+# Edit the flux1.yaml file line 183
+ - --git-url=git@github.com:kunrad/ajo.git
+        - --git-branch=master
+        - --git-path=namespaces,workloads
+        - --git-label=flux
+        - --git-user=kunrad
+        - --git-email=duruconrad@gmail.com
+
+with your corresponding information and run it on the kubernetes cluster.
